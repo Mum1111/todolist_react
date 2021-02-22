@@ -3,7 +3,17 @@
     padding: 0;
 }
 
-.App {
+input, button, select, textarea {
+    outline: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    border:0;
+}
+textarea{
+    resize:none;
+}
+
+/* .App {
     text-align: center;
     box-sizing: border-box;
-}
+} */
