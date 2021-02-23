@@ -12,6 +12,15 @@ export default class TodoContent extends Component {
 
     }
 
+    updateStatus = (obj) => {
+        console.log('调用了父组件的方法',obj)
+        this.props.updateData(obj)
+    }
+
+    deleteValue = (id) => {
+        this.props.deleteData(id)
+    }
+
    
 
     render(){
@@ -20,7 +29,7 @@ export default class TodoContent extends Component {
             <ul className='todocontent-container'>
                 {list.map((item) => {
                     return (
-                        <TodoItem item = {item} />
+                        <TodoItem item = {item} updateStatus={this.updateStatus} deleteValue={this.deleteValue}/>
                     )
                 })}
             </ul>

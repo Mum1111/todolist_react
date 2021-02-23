@@ -42,22 +42,46 @@ export default class TodoItem extends Component {
     // }
 
     handleRadio() {
-        const {status} = this.props.item
+        const {status,id,value} = this.props.item
         
         // TODO: 接着写完成后的状态 以及更新完成后的内容
+        const  newStatus = status === 0 ? 1 : 0
 
+        let obj = {
+            id,
+            value,
+            status:newStatus
+        }
+
+        this.props.updateStatus(obj)
+
+    }
+
+    handleDelete = () => {
+        const {id} = this.props.item
+        this.props.deleteValue(id)
     }
 
 
     render(){
-        const {id, value} = this.props.item
+        const {id, value, status} = this.props.item
+        const itChecked = {
+            backgroundColor : '#000'
+        }
+        const deleteLine = {
+            textDecoration: 'line-through'
+        }
+        const hideElement = {
+            display: 'none'
+        }
         return (
             <li key={id} className='todocontent-item'>
                 <div className='item-content'>
-                    <i className='radio' onClick={this.handleRadio}></i>
-                    <span className='content'>{value}</span>
+                    <i className='radio' onClick={this.handleRadio} style={ status ? itChecked : null }></i>
+                    <span className='content' style={ status ? deleteLine : null}>{value}</span>
                 </div>
-                <p className='time'>{this.timeFormat(id)}</p>
+                <p className='time' style={status ? hideElement : null }>{this.timeFormat(id)}</p>
+                <p className='time' style={status ? null : hideElement } onClick={this.handleDelete}>删除</p>
             </li>
         )
     }
